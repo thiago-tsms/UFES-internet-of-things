@@ -18,8 +18,11 @@ topico_pressao_lida = f"data/{dispositivo_konker_user}/sub/{channel_pressao_lida
 
 
 def handler(client, userdata, msg):
-    msg = msg.payload
-    print(json.loads(msg))
+    data = msg.payload
+    print('------------------------------')
+    print(f'Origem: {msg.topic}')
+    print(json.loads(data))
+    print('------------------------------\n')
 
 
 if __name__ == '__main__':
