@@ -4,13 +4,19 @@ import time
 import json
 
 
-host = "mqtt.demo.konkerlabs.net"
-topico = "data/ra7hji89lqd3/pub/001"
+host = "mqtt.prod.konkerlabs.net"
+port = 1883
+
+dispositivo_konker_user = "21j96ala4du1"
+dispositivo_konker_password = "gb72Ij9faXMw"
+
+channel = "01"
+topico = f"data/{dispositivo_konker_user}/pub/{channel}"
 
 
 def run():
     while True:
-        data = json.dumps({"temperature": random.randint(20,30), "unit": "celsius"})
+        data = json.dumps({"temp": random.randint(20,30), "unit": "celsius"})
         status = client.publish(topico, data)
         print(status)
         time.sleep(10)
@@ -18,7 +24,7 @@ def run():
     
 if __name__ == '__main__':
     client = mqtt.Client()
-    client.username_pw_set('ra7hji89lqd3', '6s4ooUG7Rix1')
-    client.connect(host, 1883)
+    client.username_pw_set(dispositivo_konker_user, dispositivo_konker_password)
+    client.connect(host, port)
     
     run()
